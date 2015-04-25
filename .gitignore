@@ -1,0 +1,8 @@
+.idea
+.sass-cache
+src/.sass-cache
+www/
+bower_components
+node_modules
+platforms/
+plugins/

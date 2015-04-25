@@ -1,0 +1,80 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/share/npm/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'cordovacli',
+1 verbose cli   '-g' ]
+2 info using npm@1.4.7
+3 info using node@v0.10.26
+4 verbose cache add [ 'cordovacli', null ]
+5 verbose cache add name=undefined spec="cordovacli" args=["cordovacli",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'cordovacli',
+6 verbose parsed url   path: 'cordovacli',
+6 verbose parsed url   href: 'cordovacli' }
+7 silly lockFile 18dfb7bf-cordovacli cordovacli
+8 verbose lock cordovacli /Users/dreamarts/.npm/18dfb7bf-cordovacli.lock
+9 silly lockFile 18dfb7bf-cordovacli cordovacli
+10 silly lockFile 18dfb7bf-cordovacli cordovacli
+11 verbose addNamed [ 'cordovacli', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile f79cd88c-cordovacli cordovacli@
+14 verbose lock cordovacli@ /Users/dreamarts/.npm/f79cd88c-cordovacli.lock
+15 silly addNameRange { name: 'cordovacli', range: '*', hasData: false }
+16 verbose url raw cordovacli
+17 verbose url resolving [ 'http://npm.dreamarts.co.jp/', './cordovacli' ]
+18 verbose url resolved http://npm.dreamarts.co.jp/cordovacli
+19 info trying registry request attempt 1 at 00:22:05
+20 http GET http://npm.dreamarts.co.jp/cordovacli
+21 http 404 http://npm.dreamarts.co.jp/cordovacli
+22 verbose headers { date: 'Sat, 25 Apr 2015 15:22:05 GMT',
+22 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+22 verbose headers   'content-type': 'application/json',
+22 verbose headers   'cache-control': 'max-age=0',
+22 verbose headers   'content-length': '51',
+22 verbose headers   'accept-ranges': 'bytes',
+22 verbose headers   via: '1.1 varnish',
+22 verbose headers   age: '0',
+22 verbose headers   'x-served-by': 'cache-hkg6823-HKG',
+22 verbose headers   'x-cache': 'MISS',
+22 verbose headers   'x-cache-hits': '0',
+22 verbose headers   'x-timer': 'S1429975325.541470,VS0,VE155',
+22 verbose headers   connection: 'close' }
+23 silly registry.get cb [ 404,
+23 silly registry.get   { date: 'Sat, 25 Apr 2015 15:22:05 GMT',
+23 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+23 silly registry.get     'content-type': 'application/json',
+23 silly registry.get     'cache-control': 'max-age=0',
+23 silly registry.get     'content-length': '51',
+23 silly registry.get     'accept-ranges': 'bytes',
+23 silly registry.get     via: '1.1 varnish',
+23 silly registry.get     age: '0',
+23 silly registry.get     'x-served-by': 'cache-hkg6823-HKG',
+23 silly registry.get     'x-cache': 'MISS',
+23 silly registry.get     'x-cache-hits': '0',
+23 silly registry.get     'x-timer': 'S1429975325.541470,VS0,VE155',
+23 silly registry.get     connection: 'close' } ]
+24 silly lockFile f79cd88c-cordovacli cordovacli@
+25 silly lockFile f79cd88c-cordovacli cordovacli@
+26 error 404 404 Not Found: cordovacli
+26 error 404
+26 error 404 'cordovacli' is not in the npm registry.
+26 error 404 You should bug the author to publish it
+26 error 404
+26 error 404 Note that you can also install from a
+26 error 404 tarball, folder, or http url, or git url.
+27 error System Darwin 14.1.0
+28 error command "node" "/usr/local/share/npm/bin/npm" "install" "cordovacli" "-g"
+29 error cwd /Users/dreamarts/WebstormProjects/cordova-enquete2
+30 error node -v v0.10.26
+31 error npm -v 1.4.7
+32 error code E404
+33 verbose exit [ 1, true ]
