@@ -17,63 +17,75 @@
  * under the License.
  */
 
-//var chiwawa = "https://demo.chiwawa.jp";
-var chiwawa = "http://192.168.11.4:8004";
+var chiwawa = "https://demo.chiwawa.jp";
+//var chiwawa = "http://192.168.11.4:8004";
 
 var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+  // Application Constructor
+  initialize: function () {
+    this.bindEvents();
+  },
+  // Bind Event Listeners
+  //
+  // Bind any events that are required on startup. Common events are:
+  // 'load', 'deviceready', 'offline', and 'online'.
+  bindEvents: function () {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+  },
+  // deviceready Event Handler
+  //
+  // The scope of 'this' is the event. In order to call the 'receivedEvent'
+  // function, we must explicitly call 'app.receivedEvent(...);'
+  onDeviceReady: function () {
+    app.receivedEvent('deviceready');
 
-        $.oauth2({
-            auth_url: chiwawa + "/oauth2/authorize",           // required
-            response_type: "code",      // required - "code"/"token"
-            token_url: chiwawa + "/oauth2/token",          // required if response_type = 'code'
-           // logout_url: '',         // recommended if available
-            client_id: 'cordovaHello',          // required
-            client_secret: 'chiwawaapp..secret',      // required if response_type = 'code'
-            redirect_uri: 'http://chiwawa.jp/auth/callback/',       // required - some dummy url
-            other_params: {}        // optional params object for scope, state, display...
-        }, function(token, response){
-            // do something with token or response
-            $("#logs").append("<p class='success'><b>access_token: </b>"+token+"</p>");
-            $("#logs").append("<p class='success'><b>response: </b>"+JSON.stringify(response)+"</p>");
-        }, function(error, response){
-            // do something with error object
-            $("#logs").append("<p class='error'><b>error: </b>"+JSON.stringify(error)+"</p>");
-            $("#logs").append("<p class='error'><b>response: </b>"+JSON.stringify(response)+"</p>");
-        });
+    var params = {
+      url: chiwawa + "/oauth2/",
+      client_id: 'cordovaHello',
+      client_secret: 'chiwawaapp..secret',
+      redirect_uri: 'http://chiwawa.jp/auth/callback/'
+    };
 
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+    var oauthParams = {
+      response_type: "code",               // required - "code"/"token"
+      auth_url: params.url + "authorize",  // required
+      token_url: params.url + "token",     // required if response_type = 'code'
+      client_id: params.client_id,         // required
+      client_secret: params.client_secret, // required if response_type = 'code'
+      redirect_uri: params.redirect_uri    // required - some dummy url
+      // other_params: {}        // optional params object for scope, state, display...
+      // logout_url: '',         // recommended if available
+    };
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+    $.oauth2(oauthParams,
+      function (token, response) {
+        // do something with token or response
+        $("#logs").append("<p class='success'><b>access_token: </b>" + token + "</p>");
+        $("#logs").append("<p class='success'><b>response: </b>" + JSON.stringify(response) + "</p>");
+      },
+      function (error, response) {
+        // do something with error object
+        $("#logs").append("<p class='error'><b>error: </b>" + JSON.stringify(error) + "</p>");
+        $("#logs").append("<p class='error'><b>response: </b>" + JSON.stringify(response) + "</p>");
+      }
+    );
 
-        $.each(document.querySelectorAll('td.device'), function () {
-            $(this).text(device[this.id]);
-        });
+  },
+  // Update DOM on a Received Event
+  receivedEvent: function (id) {
+    var parentElement = document.getElementById(id);
+    var listeningElement = parentElement.querySelector('.listening');
+    var receivedElement = parentElement.querySelector('.received');
 
-        console.log('Received Event: ' + id);
-    }
+    listeningElement.setAttribute('style', 'display:none;');
+    receivedElement.setAttribute('style', 'display:block;');
+
+    $.each(document.querySelectorAll('td.device'), function () {
+      $(this).text(device[this.id]);
+    });
+
+    console.log('Received Event: ' + id);
+  }
 };
 
 app.initialize();
