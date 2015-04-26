@@ -30,31 +30,35 @@ var app = {
   // Bind any events that are required on startup. Common events are:
   // 'load', 'deviceready', 'offline', and 'online'.
   bindEvents: function () {
-    document.addEventListener('deviceready', this.onDeviceReady, false);
+    document.addEventListener("deviceready", this.onDeviceReady, false);
   },
   // deviceready Event Handler
   //
   // The scope of 'this' is the event. In order to call the 'receivedEvent'
   // function, we must explicitly call 'app.receivedEvent(...);'
   onDeviceReady: function () {
-    app.receivedEvent('deviceready');
+    app.receivedEvent("deviceready");
 
     var params = {
       url: chiwawa + "/oauth2/",
-      client_id: 'cordovaHello',
-      client_secret: 'chiwawaapp..secret',
-      redirect_uri: 'http://chiwawa.jp/auth/callback/'
+      client_id: "cordovaHello",
+      client_secret: "chiwawaapp..secret",
+      redirect_uri: "http://chiwawa.jp/auth/callback/"
     };
+
+    var accessToken = window.localStorage.getItem("access_token");
+    $("#logs").append("<p class='success'><b>access_token: </b>" + accessToken + "</p>");
+
 
     var oauthParams = {
       response_type: "code",               // required - "code"/"token"
       auth_url: params.url + "authorize",  // required
-      token_url: params.url + "token",     // required if response_type = 'code'
+      token_url: params.url + "token",     // required if response_type = "code"
       client_id: params.client_id,         // required
-      client_secret: params.client_secret, // required if response_type = 'code'
+      client_secret: params.client_secret, // required if response_type = "code"
       redirect_uri: params.redirect_uri    // required - some dummy url
       // other_params: {}        // optional params object for scope, state, display...
-      // logout_url: '',         // recommended if available
+      // logout_url: "",         // recommended if available
     };
 
     $.oauth2(oauthParams,
@@ -62,6 +66,8 @@ var app = {
         // do something with token or response
         $("#logs").append("<p class='success'><b>access_token: </b>" + token + "</p>");
         $("#logs").append("<p class='success'><b>response: </b>" + JSON.stringify(response) + "</p>");
+
+        window.localStorage.setItem("access_token", token);
       },
       function (error, response) {
         // do something with error object
@@ -74,17 +80,17 @@ var app = {
   // Update DOM on a Received Event
   receivedEvent: function (id) {
     var parentElement = document.getElementById(id);
-    var listeningElement = parentElement.querySelector('.listening');
-    var receivedElement = parentElement.querySelector('.received');
+    var listeningElement = parentElement.querySelector(".listening");
+    var receivedElement = parentElement.querySelector(".received");
 
-    listeningElement.setAttribute('style', 'display:none;');
-    receivedElement.setAttribute('style', 'display:block;');
+    listeningElement.setAttribute("style", "display:none;");
+    receivedElement.setAttribute("style", "display:block;");
 
-    $.each(document.querySelectorAll('td.device'), function () {
+    $.each(document.querySelectorAll("td.device"), function () {
       $(this).text(device[this.id]);
     });
 
-    console.log('Received Event: ' + id);
+    console.log("Received Event: " + id);
   }
 };
 
