@@ -2,7 +2,7 @@
 
 // @see: https://gist.github.com/jonathandixon/7418730
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       install: {
         options: {
           targetDir: "www",
-          layout: function(type) {
+          layout: function (type) {
             return type;
           }
         }
@@ -25,13 +25,17 @@ module.exports = function(grunt) {
         tasks: "jade",
         files: ["src/**/*.jade"]
       },
-      scss: {
+      compass: {
         tasks: "compass",
-        files: ["src/**/*.scss"]
+        files: ["src/css/*.scss"]
       },
-      js: {
+      sync: {
+        tasks: "sync",
+        files: ["src/js/*.js"]
+      },
+      uglify: {
         tasks: "uglify",
-        files: ["src/**/*.js"]
+        files: ["www/js/*.js"]
       }
     },
 
@@ -42,6 +46,14 @@ module.exports = function(grunt) {
         src: "*",
         dest: "www/img/",
         filter: "isFile"
+      }
+    },
+
+    sync: {
+      js: {
+        files: [
+          {cwd: "src/js", src: "*", dest: "www/js/"}
+        ]
       }
     },
 
@@ -63,10 +75,10 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: "src/js/",
+          cwd: "www/js/",
           src: "*.js",
-          dest: "www/js/",
-          ext: ".min.js"
+          dest: "www/js.min/",
+          ext: ".js"
         }]
       }
     },
@@ -116,18 +128,18 @@ module.exports = function(grunt) {
           command: "plugin",
           action: "add",
           plugins: [
-    //        "console",
-    //        "media-capture",
+            //        "console",
+            //        "media-capture",
             "inappbrowser",
             "dialogs",
-    //        "geolocation",
+            //        "geolocation",
             "vibration",
-    //        "network-information",
-    //        "splashscreen",
+            //        "network-information",
+            //        "splashscreen",
             "https://github.com/phonegap-build/PushPlugin.git",
-    //        "https://github.com/petermetz/cordova-plugin-ibeacon.git",
-    //        "https://github.com/katzer/cordova-plugin-local-notifications.git",
-    //        "https://github.com/katzer/cordova-plugin-background-mode.git",
+            //        "https://github.com/petermetz/cordova-plugin-ibeacon.git",
+            //        "https://github.com/katzer/cordova-plugin-local-notifications.git",
+            //        "https://github.com/katzer/cordova-plugin-background-mode.git",
             "device"
           ]
         }
@@ -146,15 +158,15 @@ module.exports = function(grunt) {
       },
       ios_run: {
         options: {
-          command: 'run',
-          platforms: ['ios'],
-          args: ['--device']
+          command: "run",
+          platforms: ["ios"],
+          args: ["--device"]
         }
       },
       ios_emulate: {
         options: {
-          command: 'emulate',
-          platforms: ['ios']
+          command: "emulate",
+          platforms: ["ios"]
         }
       },
       android_build: {
@@ -171,15 +183,15 @@ module.exports = function(grunt) {
       },
       android_run: {
         options: {
-          command: 'run',
-          platforms: ['android'],
-          args: ['--device']
+          command: "run",
+          platforms: ["android"],
+          args: ["--device"]
         }
       },
       android_emulate: {
         options: {
-          command: 'emulate',
-          platforms: ['android']
+          command: "emulate",
+          platforms: ["android"]
         }
       },
       serve: {
@@ -203,12 +215,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-connect");
   grunt.loadNpmTasks("grunt-cordovacli");
+  grunt.loadNpmTasks("grunt-sync");
 
   grunt.registerTask("default", [
     "clean",
     "npm-install",
     "bower",
     "copy",
+    "sync",
     "compass",
     "jade",
     "uglify"

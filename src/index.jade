@@ -30,16 +30,19 @@ html
                     td cordova
                     td.device#cordova
 
-        h2: a(href="javascript: app.login();") login
-        h2: a(href="javascript: app.logout();") logout
+        h2: a(href="javascript: site.login();") login
+        h2: a(href="javascript: site.logout();") logout
         h2: a(href="javascript: app.getUser();") getUser
 
 
         #logs
 
         script(src='cordova.js')
-        script(src='js/zepto.min.js')
-        script(src='js/oauth2.min.js')
-        script(src='js/index.min.js')
+        script(src='js.min/async.js')
+        script(src='js.min/zepto.js')
+        script(src='js.min/oauth2.js')
+        script(src='js.min/site.js')
+        script(src='js.min/index.js')
+
 
 

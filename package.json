@@ -27,6 +27,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-cordovacli": "^0.7.1",
     "grunt-jade": "^0.5.1",
-    "grunt-npm-install": "^0.2.0"
+    "grunt-npm-install": "^0.2.0",
+    "grunt-sync": "^0.2.3"
   }
 }
